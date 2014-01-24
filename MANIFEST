@@ -1,0 +1,9 @@
+bin/main.pl
+Build.PL
+lib/ZabbixApi.pm
+lib/ZabbixApi/Auth.pm
+lib/ZabbixApi/Payload.pm
+lib/ZabbixApi/Request.pm
+LICENSE
+MANIFEST			This list of files
+README.md
