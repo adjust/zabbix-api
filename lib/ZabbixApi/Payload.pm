@@ -33,6 +33,14 @@ sub add_filter {
     }
 }
 
+sub add_search {
+    my $self   = shift;
+    my $params = shift;
+    while ( my ( $key, $value ) = each %$params ) {
+        $self->payload->{'params'}{'search'}{$key} = $value;
+    }
+}
+
 sub get_by_name {
     my $self    = shift;
     my $pattern = shift;
