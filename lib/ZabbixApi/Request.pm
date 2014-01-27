@@ -11,13 +11,16 @@ use JSON;
 has url     => ( is => 'ro', required => 1 );
 has payload => ( is => 'ro', required => 1 );
 
+has ua => ( is => 'rw' );
+
 sub BUILD {
+    my $self = shift;
+    $self->ua( $self->_create_user_agent ) unless $self->ua;
 }
 
 sub process {
     my $self = shift;
-    my $ua   = $self->_create_user_agent;
-    my $resp = $ua->request( $self->_create_request );
+    my $resp = $self->ua->request( $self->_create_request );
     if ( $resp->is_success ) {
         my $result = decode_json( $resp->decoded_content );
         die $resp->decoded_content if $$result{'error'};
