@@ -74,7 +74,7 @@ sub _create_skel {
         id      => '0',
     };
     if ( $self->auth ) {
-        $$skel{'auth'} = $self->auth->{auth};
+        $$skel{'auth'} = $self->auth->{auth_token};
     }
     $self->payload($skel);
 }
