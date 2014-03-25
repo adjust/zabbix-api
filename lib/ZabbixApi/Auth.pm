@@ -9,7 +9,7 @@ use Moo;
 use ZabbixApi::Request;
 use ZabbixApi::Payload;
 
-has auth => ( is => 'rw' );
+has auth_token => ( is => 'rw' );
 
 has user => ( is => 'ro', required => 1 );
 has pw   => ( is => 'ro', required => 1 );
@@ -18,11 +18,6 @@ has url  => ( is => 'ro', required => 1 );
 sub BUILD {
     my $self = shift;
     $self->_login;
-}
-
-sub auth {
-    my $self = shift;
-    return $self->{auth};
 }
 
 sub _create_payload {
@@ -45,7 +40,7 @@ sub _login {
         url     => $self->url,
         payload => $self->_create_payload,
     );
-    $self->auth( $response->process() );
+    $self->auth_token( $response->process() );
 }
 
 1;
