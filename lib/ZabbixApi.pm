@@ -49,6 +49,7 @@ sub clear {
 }
 
 sub find_by {
+    no if $] >= 5.018, warnings => "experimental::smartmatch";
     my $self = shift;
     my $key  = shift;
     my $val  = shift;
