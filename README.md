@@ -10,7 +10,7 @@ First create a ZabbixApi Object:
 ```perl
 use ZabbixApi;
 
-my $api = ZabbixApi->new(
+my $zabbix = ZabbixApi->new(
     user => 'winston',
     pw   => 'gayhaim69',
     url  => 'http://my.domain.com/api_jsonrpc.php',
@@ -75,3 +75,10 @@ $zabbix->add_params( { 'host' => 'testhost' } );
 $zabbix->process;
 ```
 Of course you can add all the params in one `add_params` call. It takes every hash ref as an argument.
+
+
+## Modules you may need
+
+- Moo.pm and JSON.pm
+On debian: apt-get install libmoo-perl libjson-perl
+
