@@ -11,9 +11,10 @@ use ZabbixApi::Auth;
 
 our $VERSION = '0.01';
 
-has user => ( is => 'ro', required => 1 );
-has pw   => ( is => 'ro', required => 1 );
-has url  => ( is => 'ro', required => 1 );
+has user       => ( is => 'ro', required => 1 );
+has pw         => ( is => 'ro', required => 1 );
+has url        => ( is => 'ro', required => 1 );
+has invalidssl => ( is => 'ro', required => 0 ); 
 
 has auth     => ( is => 'rw' );
 has payload  => ( is => 'rw' );
@@ -39,6 +40,7 @@ sub process {
     my $r    = ZabbixApi::Request->new(
         url     => $self->{url},
         payload => $self->payload->payload,
+        invalidssl => $self->{invalidssl}
     )->process;
     $self->lastresp($r);
 }
@@ -79,6 +81,7 @@ sub _auth {
         user => $self->{user},
         pw   => $self->{pw},
         url  => $self->{url},
+        invalidssl => $self->{invalidssl}
     );
     $self->auth($auth);
 }

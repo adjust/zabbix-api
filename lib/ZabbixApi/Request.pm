@@ -8,10 +8,10 @@ use Moo;
 use LWP::UserAgent;
 use JSON;
 
-has url     => ( is => 'ro', required => 1 );
-has payload => ( is => 'ro', required => 1 );
-
-has ua => ( is => 'rw' );
+has url        => ( is => 'ro', required => 1 );
+has payload    => ( is => 'ro', required => 1 );
+has invalidssl => ( is => 'ro', required => 0 );
+has ua         => ( is => 'rw' );
 
 sub BUILD {
     my $self = shift;
@@ -41,6 +41,9 @@ sub _create_request {
 sub _create_user_agent {
     my $self = shift;
     my $ua   = LWP::UserAgent->new;
+    if ( $self->{invalidssl} ) {
+        $ua->ssl_opts(verify_hostname => 0);
+    }
     $ua->timeout(10);
     return $ua;
 }

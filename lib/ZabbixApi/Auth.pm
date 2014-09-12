@@ -11,9 +11,10 @@ use ZabbixApi::Payload;
 
 has auth_token => ( is => 'rw' );
 
-has user => ( is => 'ro', required => 1 );
-has pw   => ( is => 'ro', required => 1 );
-has url  => ( is => 'ro', required => 1 );
+has user       => ( is => 'ro', required => 1 );
+has pw         => ( is => 'ro', required => 1 );
+has url        => ( is => 'ro', required => 1 );
+has invalidssl => (is => 'ro', required => 0 );
 
 sub BUILD {
     my $self = shift;
@@ -39,6 +40,7 @@ sub _login {
     my $response = ZabbixApi::Request->new(
         url     => $self->url,
         payload => $self->_create_payload,
+        invalidssl => $self->invalidssl
     );
     $self->auth_token( $response->process() );
 }
