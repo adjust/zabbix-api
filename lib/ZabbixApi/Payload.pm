@@ -25,6 +25,16 @@ sub add_params {
     }
 }
 
+sub add_params_array {
+	my $self   = shift;
+	my $params = shift;
+	while ( my ( $key, $value ) = each @$params ) {
+		$self->payload->{'params'}{$key} = $value;
+	}
+}
+
+
+
 sub add_filter {
     my $self   = shift;
     my $params = shift;
